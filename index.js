@@ -9,7 +9,6 @@ const path = require('path'); // working with file and directory paths
 
 function mdLinks(userPath, options){
   let absolutePath;
-
   if(path.isAbsolute(userPath) === false){
     absolutePath = path.resolve(userPath);
     /* console.log('resolved path'); */
@@ -19,10 +18,19 @@ function mdLinks(userPath, options){
   }
   console.log(absolutePath);
 
+  let dirOrFile;
   if(fs.existsSync(absolutePath)){
     console.log('Valid pathname');
+    //console.log(isDirectory(absolutePath));
+    dirOrFile = isDirectory(absolutePath);
   } else {
-    console.log(`Pathname doesn't exist`);
+    console.log(`Pathname doesn't exist`); //END PROCESS
+  }
+
+  if(dirOrFile === false){ //it's a dile
+
+  } else if (dirOrFile === true){ //it's a directory
+
   }
 }
 
@@ -32,7 +40,13 @@ function mdLinks(userPath, options){
 
 //Valid path
 //mdLinks('docs/new-dir');
-//mdLinks('docs/new-dir/doc3.md')
+mdLinks('docs/new-dir/doc3.md')
+
+// Determines if a given path is a directory or not
+function isDirectory(userPath){
+  const directory = fs.lstatSync(userPath).isDirectory();
+  return directory;
+}
 
 
 // Reading a file
