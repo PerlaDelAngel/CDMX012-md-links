@@ -26,6 +26,7 @@ function mdLinks(userPath, options){
   }
 }
 
+
 //Invalid path
 //mdLinks('docs/new-dir');
 
