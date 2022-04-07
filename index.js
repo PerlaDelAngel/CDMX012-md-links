@@ -27,11 +27,17 @@ function mdLinks(userPath, options){
     console.log(`Pathname doesn't exist`); //END PROCESS
   }
 
-  if(dirOrFile === false){ //it's a dile
-
-  } else if (dirOrFile === true){ //it's a directory
-
+  if(dirOrFile === false){ //File
+    const ext = extension(absolutePath);
+    if (ext !== '.md'){ //Not a MD file
+      console.log('This is not a markdown file and cannot be analyzed'); //END PROCESS
+    } else if (ext === '.md'){ //MD file
+       readFile(absolutePath);
+    }
   }
+   /* else if (dirOrFile === true){ //Directory
+
+  } */
 }
 
 
@@ -40,7 +46,8 @@ function mdLinks(userPath, options){
 
 //Valid path
 //mdLinks('docs/new-dir');
-mdLinks('docs/new-dir/doc3.md')
+//mdLinks('docs/new-dir/doc3.md');
+mdLinks('docs/new-dir/testdoc.txt');
 
 // Determines if a given path is a directory or not
 function isDirectory(userPath){
@@ -48,10 +55,16 @@ function isDirectory(userPath){
   return directory;
 }
 
+// Extracting the type of the file
+function extension(filePath){
+  const ext = path.extname(filePath);
+  console.log(ext);
+  return ext;
+}
 
 // Reading a file
-const readFile = (filePath) => {
-  fs.readFile('filePath', 'utf8', (err, data) => {
+function readFile(filePath){
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if(err){
       console.log(err);
     } else {
@@ -60,14 +73,8 @@ const readFile = (filePath) => {
 });
 };
 
-// Extracting the type of the file
-const extension = (filePath) => {
-  const ext = path.extname(filePath);
-  console.log(ext);
-};
-
 // Printing in console an array of the files inside a directory
-const readDirectory = (directoryPath) => {
+function readDirectory(directoryPath){
   fs.readdir(directoryPath, (err, files) => {
     if(err){
       console.log(err);
