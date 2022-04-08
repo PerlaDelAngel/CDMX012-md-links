@@ -10,7 +10,6 @@ function isDirectory(userPath){
 // Extracting the type of the file
 function extension(filePath){
   const ext = path.extname(filePath);
-  //console.log(ext);
   return ext;
 }
   
@@ -25,15 +24,62 @@ function readFile(filePath){
   });
 };
   
-// Printing in console an array of the files inside a directory
-function readDirectory(directoryPath){
+// Finding the md files inside a directory
+function readDirec(directoryPath){
+  let mdFiles = [];
   fs.readdir(directoryPath, (err, files) => {
     if(err){
       console.log(err);
     } else {
-      console.log(files);
+      const contentsArr = files; //Todo el contenido del directorio
+      contentsArr.forEach(files => {
+        if(extension(files) === '.md'){ //si es archivo MD
+          mdFiles.push(path.resolve(directoryPath, files));
+        } else if(extension(files) === ''){ //si es carpeta
+          let resolvedPath = path.resolve(directoryPath, files);
+          readDirectory(resolvedPath);
+        }
+      })
+      //console.log(mdFiles);
+      //return mdFiles;
     }
+  })
+  return mdFiles;
+};
+
+function readDirectory(directoryPath) {
+  return new Promise(function(resolve, reject) {
+    fs.readdir(directoryPath, function(err, files){
+      if (err) 
+        reject(err); 
+      else 
+        resolve(files)
+      });
   });
 };
+
+function readDirRecursive(resolved, ){
+
+}
+
+
+function recursiveFileExtrac(dir){
+/*Pasos: 
+1. Se ejecuta sobre una carpeta
+2. Lee los contenidos, los guarda en un array Content y lo recorre
+3. Identifica la extensión de cada uno, si tienen extensión, los manda al array de Files, 
+sino entonces significa que son una carpeta, y que esta función se 
+debe ejecutar dentro de esa carpeta también
+4. Debe dejar de ejecutarse cuando termine de recorrer el array de content
+*/
+
+  // Caso base, cuándo debe detenerse
+
+  // Lo que hará cuando encuentre una carpeta
+
+  // Almacenar los pathnames en un array
+
+  // La función se llama a sí misma nuevamente
+}
 
 module.exports = {isDirectory, extension, readFile, readDirectory}
