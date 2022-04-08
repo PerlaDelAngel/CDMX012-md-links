@@ -1,7 +1,6 @@
 const fs = require('fs'); //file system
 const path = require('path'); // working with file and directory paths
-// const EventEmitter = require('events');
-// const readline = require('readline'); // to receive user inputs
+const process = require('process')
 
 /* module.exports = () => {
   // ...
@@ -24,28 +23,31 @@ function mdLinks(userPath, options){
     //console.log(isDirectory(absolutePath));
     dirOrFile = isDirectory(absolutePath);
   } else {
-    console.log(`Pathname doesn't exist`); //END PROCESS
+    // console.log(`Path doesn't exist`); 
+    process.stdout.write('Path does not exist\n');
+    process.exit(); // END PROCESS
   }
 
   if(dirOrFile === false){ //File
     const ext = extension(absolutePath);
     if (ext !== '.md'){ //Not a MD file
-      console.log('This is not a markdown file and cannot be analyzed'); //END PROCESS
+      process.stdout.write('This is not a markdown file and cannot be analyzed');
+      process.exit(); //END PROCESS
     } else if (ext === '.md'){ //MD file
-       readFile(absolutePath);
+      readFile(absolutePath);
     }
   }
-   /* else if (dirOrFile === true){ //Directory
-
-  } */
+  else if (dirOrFile === true){ //Directory
+    
+  }
 }
 
 
 //Invalid path
-//mdLinks('docs/new-dir');
+//mdLinks('docs/old-dir');
 
 //Valid path
-//mdLinks('docs/new-dir');
+//mdLinks('docs');
 //mdLinks('docs/new-dir/doc3.md');
 mdLinks('docs/new-dir/testdoc.txt');
 
@@ -58,7 +60,7 @@ function isDirectory(userPath){
 // Extracting the type of the file
 function extension(filePath){
   const ext = path.extname(filePath);
-  console.log(ext);
+  //console.log(ext);
   return ext;
 }
 
