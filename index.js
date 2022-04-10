@@ -1,7 +1,8 @@
 const fs = require('fs'); //file system
 const path = require('path'); // working with file and directory paths
 const process = require('process');
-const fileValid = require('./file-validation');
+const file = require('./read-file');
+const folder = require('./read-directory');
 
 /* module.exports = () => {
   // ...
@@ -19,46 +20,29 @@ function mdLinks(userPath, options){
   let dirOrFile;
   if(fs.existsSync(absolutePath)){ //Checks if the path exists
     console.log('Valid pathname');
-    dirOrFile = fileValid.isDirectory(absolutePath); // The path belongs to a file or a directory?
+    dirOrFile = fs.lstatSync(absolutePath).isDirectory(); // The path belongs to a file or a directory?
   } else {
     process.stdout.write('Path does not exist');
     process.exit();
   }
-
-  let filesArr = [];
+  
   let mdFiles = [];
 
   if(dirOrFile === false){ //File
-    const ext = fileValid.extension(absolutePath);
+    const ext = path.extname(absolutePath);
     if (ext !== '.md'){ //Not a MD file
       process.stdout.write('This is not a markdown file and cannot be analyzed');
       process.exit();
     } else if (ext === '.md'){ //MD file
-      fileValid.readFile(absolutePath)
+      file.readFile(absolutePath);
     }
   }
   else if (dirOrFile === true){ //Directory
-    const docs = fileValid.readDirectory(absolutePath);
-    docs
-    .then((files) => {
-      files.forEach(file => {
-        let resolvedPath = path.resolve(absolutePath, file);
-        filesArr.push(resolvedPath);
-      });
-      //console.log(filesArr); //Aquí si regresa los paths en un array
-      
-      filesArr.forEach(filepath => {
-        if(fileValid.extension(filepath) === '.md'){
-          mdFiles.push(filepath);
-        } else if (fileValid.isDirectory(filepath) === true){
-          console.log(`This is a directory: ${filepath}`); //Falta implementar la recursividad para revisar las carpetas
-        }
-      });
-      console.log(mdFiles)
-
-    });
+    //folder.readDirRecursive(absolutePath, elements, mdFiles);
+    folder.readDirRecursive(absolutePath, mdFiles);
   };
 
+  
 };
 
 
