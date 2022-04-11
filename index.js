@@ -40,11 +40,12 @@ function mdLinks(userPath, options){
   }
   else if (dirOrFile === true){ //Directory
     folder.readDirRecursive(absolutePath, mdFiles)
-    console.log(mdFiles)
+    //console.log(mdFiles)
   };
 
   //ejecutar leer un archivo, va a recibir el array con muchos archivos
-  //file.readFilesRec(mdFiles);
+  //file.defaultBehavior(mdFiles);
+  file.getLinks(mdFiles[0])
 };
 
 
@@ -52,7 +53,7 @@ function mdLinks(userPath, options){
 //mdLinks('docs/old-dir');
 
 //Valid path
-mdLinks('docs');
+//mdLinks('docs');
 //mdLinks('docs/new-dir/doc3.md');
 //mdLinks('docs/new-dir/testdoc.txt');
-//mdLinks('docs/doc1.md');
+mdLinks('docs/doc1.md');
