@@ -34,15 +34,17 @@ function mdLinks(userPath, options){
       process.stdout.write('This is not a markdown file and cannot be analyzed');
       process.exit();
     } else if (ext === '.md'){ //MD file
-      file.readFile(absolutePath);
+      //file.readFile(absolutePath);
+      mdFiles.push(absolutePath);
     }
   }
   else if (dirOrFile === true){ //Directory
-    //folder.readDirRecursive(absolutePath, elements, mdFiles);
-    folder.readDirRecursive(absolutePath, mdFiles);
+    folder.readDirRecursive(absolutePath, mdFiles)
+    console.log(mdFiles)
   };
 
-  
+  //ejecutar leer un archivo, va a recibir el array con muchos archivos
+  //file.readFilesRec(mdFiles);
 };
 
 
@@ -53,3 +55,4 @@ function mdLinks(userPath, options){
 mdLinks('docs');
 //mdLinks('docs/new-dir/doc3.md');
 //mdLinks('docs/new-dir/testdoc.txt');
+//mdLinks('docs/doc1.md');
