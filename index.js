@@ -44,11 +44,9 @@ function mdLinks(userPath, options){
     };
   
     //ejecutar leer un archivo, va a recibir el array con muchos archivos
-    //file.getLinks(mdFiles[0])
-    //file.defaultBehavior(mdFiles, userPath);
     const obtainedLinks = file.getLinks(mdFiles);
 
-    if (mdFiles.length > 0) {
+    if (options === undefined) { //Acá poner condiciones, ej. options = validate:true, etc
       return resolve(obtainedLinks);
     }
     else {
@@ -59,10 +57,9 @@ function mdLinks(userPath, options){
 
 //Valid path
 mdLinks('docs')
-.then((result)=>{
-  console.log(result)
+.then((links)=>{
+  console.log(links)
 })
-
 
 //Invalid path
 //mdLinks('docs/old-dir');

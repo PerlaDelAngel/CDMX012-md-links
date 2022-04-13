@@ -5,40 +5,45 @@ const path = require('path'); // working with file and directory paths
 //Reading a file and extracting links
 function getLinks(filePaths){ //recibe un archivo
   let links = [];
+  let arrayLinks = [];
+  let filepath = []
 
-  filePaths.forEach(file => {
-    const data = fs.readFileSync(file, 'utf8');
+  filePaths.forEach(mdFile => {
+    const data = fs.readFileSync(mdFile, 'utf8');
 
-    const linkRegExp = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
-    
+    const linkRegExp = /\[([^\]]+)\]\(https?:\/\/(www\.)?[\w\-]+(\.[\w\-]+)+[/#?]?.*\)/gi;
+
     const linkMatches = [...data.matchAll(linkRegExp)]
     linkMatches.forEach(link => {
-    links.push(link[0])
+      links.push(link);
+      filepath.push(mdFile);
+    });
   });
-  })
 
-  return links;
+  links.forEach((linkObj) => {
+    let i = links.indexOf(linkObj);
+    const opening = linkObj[0].indexOf('(');
+    const closing = linkObj[0].indexOf(')'); //hasta que haya un espacio
+    let url = linkObj[0].slice(opening + 1, closing);
+    
+    if(url.includes(' ')){
+      url = url.slice(0, (url.indexOf(' ')))
+    } 
 
-  /* const textRegExp = /\[(.*)\]/g;
-  let titles = []
-  const linkTitles = [...data.matchAll(textRegExp)];
-  linkTitles.forEach(linkTitle => {
-    titles.push(linkTitle[1])
-    //console.log(linkTitle[1]); 
-  }); */
-  
-  /* const linksObj = {};
-  titles.forEach((title, index) => {
-    linksObj[title] = links[index];
-  }) */
-  //console.log(linksObj)
-  
-  //return linksObj;
+    arrayLinks.push({
+      href: url,
+      text: linkObj[1],
+      file: filepath[i],
+    });
+  });
+
+  //console.log(arrayLinks)
+  return arrayLinks;
 }
 
 
 //Function for the array that contains all the md file paths
-function defaultBehavior(filesArr, userPath){
+/* function defaultBehavior(filesArr, userPath){
   const basePath = userPath;
 
   filesArr.forEach(mdFile => { //Recorre los archivos
@@ -52,7 +57,7 @@ function defaultBehavior(filesArr, userPath){
       }) 
     }
   })
-}
+} */
 
 
-module.exports = {defaultBehavior, getLinks}
+module.exports = {/* defaultBehavior, */ getLinks}
