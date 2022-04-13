@@ -9,45 +9,57 @@ const folder = require('./read-directory');
 }; */
 
 function mdLinks(userPath, options){
-  let absolutePath;
-  if(path.isAbsolute(userPath) === false){
-    absolutePath = path.resolve(userPath);
-  } else {
-    absolutePath = userPath;
-  }
-  console.log(absolutePath);
-
-  let dirOrFile;
-  if(fs.existsSync(absolutePath)){ //Checks if the path exists
-    console.log('Valid pathname');
-    dirOrFile = fs.lstatSync(absolutePath).isDirectory(); // The path belongs to a file or a directory?
-  } else {
-    process.stdout.write('Path does not exist');
-    process.exit();
-  }
-  
-  let mdFiles = [];
-
-  if(dirOrFile === false){ //File
-    const ext = path.extname(absolutePath);
-    if (ext !== '.md'){ //Not a MD file
-      process.stdout.write('This is not a markdown file and cannot be analyzed');
-      process.exit();
-    } else if (ext === '.md'){ //MD file
-      //file.readFile(absolutePath);
-      mdFiles.push(absolutePath);
+  return new Promise(function(resolve, reject){
+    let absolutePath;
+    if(path.isAbsolute(userPath) === false){
+      absolutePath = path.resolve(userPath);
+    } else {
+      absolutePath = userPath;
     }
-  }
-  else if (dirOrFile === true){ //Directory
-    folder.readDirRecursive(absolutePath, mdFiles)
-    //console.log(mdFiles)
-  };
+    console.log(absolutePath);
+  
+    let dirOrFile;
+    if(fs.existsSync(absolutePath)){ //Checks if the path exists
+      console.log('Valid pathname');
+      dirOrFile = fs.lstatSync(absolutePath).isDirectory(); // The path belongs to a file or a directory?
+    } else {
+      process.stdout.write('Path does not exist');
+      process.exit();
+    }
+    
+    let mdFiles = [];
+  
+    if(dirOrFile === false){ //File
+      const ext = path.extname(absolutePath);
+      if (ext !== '.md'){ //Not a MD file
+        process.stdout.write('This is not a markdown file and cannot be analyzed');
+        process.exit();
+      } else if (ext === '.md'){ //MD file
+        //file.readFile(absolutePath);
+        mdFiles.push(absolutePath);
+      }
+    }
+    else if (dirOrFile === true){ //Directory
+      folder.readDirRecursive(absolutePath, mdFiles);
+    };
+  
+    //ejecutar leer un archivo, va a recibir el array con muchos archivos
+    const obtainedLinks = file.getLinks(mdFiles);
 
-  //ejecutar leer un archivo, va a recibir el array con muchos archivos
-  //file.defaultBehavior(mdFiles);
-  file.getLinks(mdFiles[0])
-};
+    if (options === undefined) { //Acá poner condiciones, ej. options = validate:true, etc
+      return resolve(obtainedLinks);
+    }
+    else {
+      return reject(Error("Something went wrong"));
+    }
+  })
+}
 
+//Valid path
+mdLinks('docs')
+.then((links)=>{
+  console.log(links)
+})
 
 //Invalid path
 //mdLinks('docs/old-dir');
@@ -56,4 +68,4 @@ function mdLinks(userPath, options){
 //mdLinks('docs');
 //mdLinks('docs/new-dir/doc3.md');
 //mdLinks('docs/new-dir/testdoc.txt');
-mdLinks('docs/doc1.md');
+//mdLinks('docs/doc1.md');

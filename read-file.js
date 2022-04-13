@@ -3,44 +3,61 @@ const path = require('path'); // working with file and directory paths
 
 
 //Reading a file and extracting links
-function getLinks(filePath){ //recibe un archivo
-  const data = fs.readFileSync(filePath, 'utf8');
-
-  const textRegExp = /\[(.*)\]/g;
-  let titles = []
-  const linkTitles = [...data.matchAll(textRegExp)];
-  linkTitles.forEach(linkTitle => {
-    titles.push(linkTitle[1])
-    //console.log(linkTitle[1]); 
-  });
-  
-  const linkRegExp = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])/g;
+function getLinks(filePaths){ //recibe un archivo
   let links = [];
-  const linkMatches = [...data.matchAll(linkRegExp)]
-  linkMatches.forEach(link => {
-    links.push(link[0])
-    //console.log(link[0]); 
+  let arrayLinks = [];
+  let filepath = []
+
+  filePaths.forEach(mdFile => {
+    const data = fs.readFileSync(mdFile, 'utf8');
+
+    const linkRegExp = /\[([^\]]+)\]\(https?:\/\/(www\.)?[\w\-]+(\.[\w\-]+)+[/#?]?.*\)/gi;
+
+    const linkMatches = [...data.matchAll(linkRegExp)]
+    linkMatches.forEach(link => {
+      links.push(link);
+      filepath.push(mdFile);
+    });
   });
 
-  const linksObj = {};
-  titles.forEach((title, index) => {
-    linksObj[title] = links[index];
-  })
-  //console.log(linksObj)
-  
-  return linksObj;
+  links.forEach((linkObj) => {
+    let i = links.indexOf(linkObj);
+    const opening = linkObj[0].indexOf('(');
+    const closing = linkObj[0].indexOf(')'); //hasta que haya un espacio
+    let url = linkObj[0].slice(opening + 1, closing);
+    
+    if(url.includes(' ')){
+      url = url.slice(0, (url.indexOf(' ')))
+    } 
+
+    arrayLinks.push({
+      href: url,
+      text: linkObj[1],
+      file: filepath[i],
+    });
+  });
+
+  //console.log(arrayLinks)
+  return arrayLinks;
 }
+
 
 //Function for the array that contains all the md file paths
-function defaultBehavior(filesArr){
+/* function defaultBehavior(filesArr, userPath){
+  const basePath = userPath;
+
   filesArr.forEach(mdFile => { //Recorre los archivos
+    const userInputPath = mdFile.match(basePath);
+    const relative = mdFile.slice(userInputPath.index, mdFile.length);
+
     const links = getLinks(mdFile); //Extrae links
-    //console.log(links);
-    links.forEach(link => { //Recorre los links
-      //console.log(`${mdFile} ${link}`)
-    }) 
+    if(links.length > 0){ //Aplica solo para los archivos que tuvieron links
+      links.forEach(link => { //Recorre los links
+        process.stdout.write(`${relative} ${link}\n`); //FALTA AGREGARLE EL TEXTO ASOCIADO
+      }) 
+    }
   })
-}
+} */
 
 
-module.exports = {defaultBehavior, getLinks}
+module.exports = {/* defaultBehavior, */ getLinks}
