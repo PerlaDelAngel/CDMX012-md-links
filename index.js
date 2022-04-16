@@ -3,6 +3,7 @@ const folder = require('./read-directory');
 const validPath = require('./validate-path');
 const links = require('./get-links');
 const validate = require('./link-validation');
+const stats = require('./stats');
 
 //let userPath = process.argv[2];
 
@@ -17,18 +18,18 @@ function mdLinks(userPath, options){
     if(dirOrFile === false){
       file.pathIsFile(absolutePath, mdFiles);
     } else if (dirOrFile === true){ //Directory
-      folder.readDirRecursive(absolutePath, mdFiles);
+      folder.readDirec(absolutePath, mdFiles);
     };
 
     const obtainedLinks = links.getLinks(mdFiles);
 
-    if (options === undefined) { //Acá poner condiciones, ej. options = validate:true, etc
+    if (options === undefined) { 
       return resolve(obtainedLinks);
     } else if (options.validate === true){
-      const status = obtainedLinks.map(link => {
-        return validate.validateLink(link);
-      })
-      resolve(Promise.all(status))
+      const status = obtainedLinks.map(link => validate.validateLink(link))
+      resolve(Promise.all(status));
+    } else if (options === '--stats'){
+      stats.stats(obtainedLinks);
     }
     else {
       return reject(Error("Something went wrong"));
@@ -45,7 +46,13 @@ function mdLinks(userPath, options){
 })  */
 
 //Valid path with validate true
-mdLinks('docs/doc2.md', { validate: true })
+/* mdLinks('docs/doc2.md', { validate: true })
+.then((result)=>{
+  console.log(result)
+})  */
+
+//Valid path with validate true
+mdLinks('docs/doc1.md', '--stats')
 .then((result)=>{
   console.log(result)
 }) 

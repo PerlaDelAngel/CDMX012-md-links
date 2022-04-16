@@ -9,7 +9,6 @@ function validateLink(linkObj){
         'status' : response.status,
         'ok' : 'ok',
       }
-      //console.log(finalObj);
       return finalObj;
     }
     }))
@@ -20,7 +19,6 @@ function validateLink(linkObj){
           'status' : err.response.status,
           'ok' : 'fail',
         }
-        //console.log(finalObj);
         return finalObj;
       }
     });
