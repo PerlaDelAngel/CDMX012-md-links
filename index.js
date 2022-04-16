@@ -3,7 +3,7 @@ const folder = require('./read-directory');
 const validPath = require('./validate-path');
 const links = require('./get-links');
 const validate = require('./link-validation');
-const stats = require('./stats');
+const linkStats = require('./stats');
 
 //let userPath = process.argv[2];
 
@@ -26,10 +26,12 @@ function mdLinks(userPath, options){
     if (options === undefined) { 
       return resolve(obtainedLinks);
     } else if (options.validate === true){
-      const status = obtainedLinks.map(link => validate.validateLink(link))
+      const status = obtainedLinks.map(link => validate.validateLink(link));
       resolve(Promise.all(status));
     } else if (options === '--stats'){
-      stats.stats(obtainedLinks);
+      linkStats.stats(obtainedLinks);
+    } else if (options === '--stats --validate'){
+      linkStats.combinedStats(obtainedLinks);
     }
     else {
       return reject(Error("Something went wrong"));
@@ -52,7 +54,7 @@ function mdLinks(userPath, options){
 })  */
 
 //Valid path with validate true
-mdLinks('docs/doc1.md', '--stats')
+mdLinks('docs', '--stats --validate')
 .then((result)=>{
   console.log(result)
 }) 

@@ -20,6 +20,13 @@ function validateLink(linkObj){
           'ok' : 'fail',
         }
         return finalObj;
+      } else {
+        const finalObj = {
+          ...linkObj, 
+          'status' : 'Bad request',
+          'ok' : 'fail',
+        }
+        return finalObj;
       }
     });
 }
