@@ -1,9 +1,9 @@
 File with 6 links
-[Markdown](https://es.wikipedia.org/wiki/Markdown)  
-[md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
+[Markdown](https://es.wikipedia.org/wiki/Markdown)
 
 [Node.js](https://nodejs.org/es/)
 [Google](https://www.google.com/)
 
 [Youtube](https://www.youtube.com/)
 [el texto](https://el_link.com “el texto”)
+[Node.js](https://nodejs.org/es/)

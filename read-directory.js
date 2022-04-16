@@ -2,13 +2,13 @@ const fs = require('fs');
 const path = require('path');
 // const readdir = require('fs/promises')
 
-function readDirRecursive(inputPath, arrFiles){
+function readDirec(inputPath, arrFiles){
   const filenames = fs.readdirSync(inputPath);
 
   filenames.forEach((element)=>{
     const resolvedPath = path.resolve(inputPath, element);
     if(fs.lstatSync(resolvedPath).isDirectory()){
-      readDirRecursive(resolvedPath, arrFiles);
+      readDirec(resolvedPath, arrFiles);
     } else if(path.extname(resolvedPath) === '.md'){
       arrFiles.push(resolvedPath);
     }
@@ -17,4 +17,4 @@ function readDirRecursive(inputPath, arrFiles){
   return arrFiles;
 }
 
-module.exports = {readDirRecursive}
+module.exports = {readDirec}
