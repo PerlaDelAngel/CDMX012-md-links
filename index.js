@@ -1,51 +1,50 @@
-const file = require('./read-file');
-const folder = require('./read-directory');
-const validPath = require('./validate-path');
-const links = require('./get-links');
-const validate = require('./link-validation');
-const linkStats = require('./stats');
+const file = require('./lib/read-file');
+const folder = require('./lib/read-directory');
+const validPath = require('./lib/validate-path');
+const links = require('./lib/get-links');
+const validate = require('./lib/link-validation');
+const linkStats = require('./lib/stats');
 
-//let userPath = process.argv[2];
 
 function mdLinks(userPath, options){
   return new Promise(function(resolve, reject){
     const absolutePath = validPath.resolvePath(userPath);
-    console.log(absolutePath);
 
     let dirOrFile = validPath.directoryOrFile(absolutePath);
     
     let mdFiles = [];
     if(dirOrFile === false){
       file.pathIsFile(absolutePath, mdFiles);
-    } else if (dirOrFile === true){ //Directory
+    } else if (dirOrFile === true){
       folder.readDirec(absolutePath, mdFiles);
     };
 
     const obtainedLinks = links.getLinks(mdFiles);
 
-    if (options === undefined) { 
+    if (options.validate === false) { 
       return resolve(obtainedLinks);
-    } else if (options.validate === true){
+    } 
+    else if (options.validate === true){
       const status = obtainedLinks.map(link => validate.validateLink(link));
       resolve(Promise.all(status));
-    } else if (options === '--stats'){
+    } 
+    /* else if (options === '--stats'){
       linkStats.stats(obtainedLinks);
-    } else if (options === '--stats --validate'){
+    } 
+    else if (options === '--stats --validate'){
       linkStats.combinedStats(obtainedLinks);
-    }
+    } */
     else {
       return reject(Error("Something went wrong"));
     }
   })
 }
 
-//console.log(process.argv[2])
-
 //Valid path with options undefined
-/* mdLinks('docs/doc2.md')
+mdLinks('docs/doc2.md', { validate: false })
 .then((result)=>{
   console.log(result)
-})  */
+}) 
 
 //Valid path with validate true
 /* mdLinks('docs/doc2.md', { validate: true })
@@ -53,11 +52,11 @@ function mdLinks(userPath, options){
   console.log(result)
 })  */
 
-//Valid path with validate true
-mdLinks('docs', '--stats --validate')
+//Valid path with stats and validate true
+/* mdLinks('docs', '--stats --validate')
 .then((result)=>{
   console.log(result)
-}) 
+})  */
 
 //Invalid path
 //mdLinks('docs/old-dir');
