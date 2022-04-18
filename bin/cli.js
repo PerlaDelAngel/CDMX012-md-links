@@ -37,7 +37,7 @@ const argv = yargs
   .epilog(emphasis('Made by Perla Del Ángel, copyright 2022\n'))
   .argv;
 
-//console.log(argv);
+//console.log(argv)
 
 // Arguments
 const userPath = argv._[0];
