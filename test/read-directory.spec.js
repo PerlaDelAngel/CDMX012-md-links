@@ -1,4 +1,3 @@
-const { exitProcess } = require('yargs');
 const readDirec = require('../lib/read-directory');
 /*
 1. Recibe un path de un directorio y un array vacio (Array1)
