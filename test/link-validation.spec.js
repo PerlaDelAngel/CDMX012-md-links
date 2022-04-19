@@ -1,4 +1,3 @@
-const { exitProcess } = require('yargs');
 const validateLink = require('../lib/link-validation');
 /*Function returns a promise 
 Receives an object with an .href property 

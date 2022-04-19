@@ -76,7 +76,7 @@ if(userPath === undefined){
       const broken = linkStats.brokenLinks(result);
       broken
       .then((brokenLink) => {
-        console.log(`${successful('Links found: ')}\n${difText('Total:')} ${result.length}\n${difText('Unique:')} ${unique.length}\n${fail('Broken:')} ${brokenLink.length}`)
+        console.log(`${successful('Links found: ')}\n${difText('Total:')} ${result.length}\n${difText('Unique:')} ${unique.length}\n${fail('Broken:')} ${brokenLink}`)
       });
     }
   })

@@ -10,6 +10,9 @@ describe('Obtains information for each link found in the given path', () => {
       file: 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md',},
       {href: 'https://github.com/PerlaDelAngel/CDMX012-social-network',
       text: 'Social Network Old GH',
+      file: 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md',},
+      {href: 'http://community.laboratoria.la/c/js',
+      text: 'foro de la comunidad',
       file: 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md',}
     ];
     
