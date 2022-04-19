@@ -2,7 +2,7 @@
 const yargs = require('yargs');
 const chalk = require('chalk');
 const fs = require('fs');
-const mdLinks = require('../lib/index.js');
+const mdLinks = require('../lib/mdLinks.js');
 const linkStats = require('../lib/stats.js');
 
 // Styles
@@ -15,7 +15,7 @@ const emphasis = chalk.magenta;
 //Arguments 
 const argv = yargs
   .scriptName('mdLinks')
-  .usage(`\nUsage: $0 path --validate --stats \n(validate and stats commands are optional, paths can be absolute or relative`)
+  .usage(emphasis(`\nUsage: $0 path --validate --stats \n(validate and stats commands are optional, paths can be absolute or relative`))
   .example('$0 docs\\doc.md --validate --stats')
   .option('validate', {
     alias: 'v',
@@ -76,7 +76,7 @@ if(userPath === undefined){
       const broken = linkStats.brokenLinks(result);
       broken
       .then((brokenLink) => {
-        console.log(`${successful('Links found: ')}\n${difText('Total:')} ${result.length}\n${difText('Unique:')} ${unique.length}\n${fail('Broken:')} ${brokenLink.length}`)
+        console.log(`${successful('Links found: ')}\n${difText('Total:')} ${result.length}\n${difText('Unique:')} ${unique.length}\n${fail('Broken:')} ${brokenLink}`)
       });
     }
   })
