@@ -46,7 +46,7 @@ const getStats = argv.stats;
 
 //Validation of path arg
 if(userPath === undefined){
-  console.log(errorSty('Unrecognizable path, type --help for available options'));
+  console.log(errorSty('Can not recognize this command, type --help for available options'));
 } else if(!fs.existsSync(userPath)){ 
   console.log(errorSty('Path does not exist, please try with another one'));
 } else {
