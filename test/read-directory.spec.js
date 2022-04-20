@@ -1,4 +1,4 @@
-const readDirec = require('../lib/read-directory');
+const readDirec = require('../components/read-directory');
 /*
 1. Recibe un path de un directorio y un array vacio (Array1)
 2. Lee el directorio y guarda los paths relativos en otro array (ArrayTemp)

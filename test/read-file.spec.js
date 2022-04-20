@@ -1,4 +1,4 @@
-const pathIsFile = require('../lib/read-file');
+const pathIsFile = require('../components/read-file');
 
 describe('Identifies markdown files', () => {
   it('should receive a path to a file that is not markdown', () => {

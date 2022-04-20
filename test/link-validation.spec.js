@@ -1,4 +1,4 @@
-const validateLink = require('../lib/link-validation');
+const validateLink = require('../components/link-validation');
 /*Function returns a promise 
 Receives an object with an .href property 
 makes an http request with it and returns an object with href, text, file, status, and ok properties

@@ -1,4 +1,4 @@
-const mdLinks = require('../lib/mdLinks');
+const mdLinks = require('../components/mdLinks');
 
 /* Receives a path
 ----- 3 possible results ----
