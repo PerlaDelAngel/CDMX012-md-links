@@ -2,8 +2,8 @@
 const yargs = require('yargs');
 const chalk = require('chalk');
 const fs = require('fs');
-const mdLinks = require('../lib/mdLinks.js');
-const linkStats = require('../lib/stats.js');
+const mdLinks = require('../components/mdLinks.js');
+const linkStats = require('../components/stats.js');
 
 // Styles
 const successful = chalk.green.bold;
@@ -15,7 +15,7 @@ const emphasis = chalk.magenta;
 //Arguments 
 const argv = yargs
   .scriptName('mdLinks')
-  .usage(emphasis(`\nUsage: $0 path --validate --stats \n(validate and stats commands are optional, paths can be absolute or relative`))
+  .usage(emphasis(`\nUsage: $0 path --validate --stats \n(validate and stats commands are optional, paths can be absolute or relative)`))
   .example('$0 docs\\doc.md --validate --stats')
   .option('validate', {
     alias: 'v',

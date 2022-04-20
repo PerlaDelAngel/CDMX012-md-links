@@ -1,4 +1,4 @@
-const getLinks = require('../lib/get-links');
+const getLinks = require('../components/get-links');
 
 describe('Obtains information for each link found in the given path', () => {
   it('should return an array with objects for each link', () => {

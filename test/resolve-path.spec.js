@@ -1,4 +1,4 @@
-const resolvePath = require('../lib/resolve-path');
+const resolvePath = require('../components/resolve-path');
 
 describe('Returns an absolute path', () => {
   it('should receive a relative path and turn it into an absolute one', () => {

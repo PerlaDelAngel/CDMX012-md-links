@@ -1,4 +1,4 @@
-const getStats = require('../lib/stats');
+const getStats = require('../components/stats');
 
 /* getStats.stats 
 RECEIVES: Array with objects, each object has href property
