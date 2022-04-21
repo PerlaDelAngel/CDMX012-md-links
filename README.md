@@ -27,7 +27,7 @@ This project has the following dependencies:
 * [Chalk](https://github.com/chalk/chalk)
 * [Axios](https://github.com/axios/axios)
 
-Library tested using [Jest](https://jestjs.io/). 
+Tested using [Jest](https://jestjs.io/). 
 
 To set up the logic behind this application I elaborated a [flowchart](#flowchart) stating the paths the program would follow given certain circumstances and inputs, you can check it out at the end of this file. 
 
@@ -52,29 +52,49 @@ Additionally, you can provide a couple of different options to obtain three diff
 ## 5. Examples
 
 *Working with a relative path*
+
 Input: `mdLinks test-docs\doc1.md`
+
 Expected output:
+
 ![Example with a relative path](./img/relative-path.png)
 
+
 *Working with a relative path and validate*
+
 Input: `mdLinks test-docs\doc1.md --validate` or `mdLinks test-docs\doc1.md -v`
+
 Expected output:
+
 ![Example with a relative path and validate](./img/relative-path-validate.png)
 
+
 *Working with a relative path and stats*
+
 Input: `mdLinks test-docs\doc1.md --stats` or `mdLinks test-docs\doc1.md -s`
+
 Expected output:
+
 ![Example with a relative path and stats](./img/relative-path-stats.png)
 
+
 *Working with a relative path, validate and stats*
+
 Input: `mdLinks test-docs\doc1.md --validate --stats` or `mdLinks test-docs\doc1.md -v -s`
+
 Expected output:
+
 ![Example with a relative path, validate and stats](./img/relative-path-validate-stats.png)
 
+
 *Working with an absolute path*
+
 Input: `mdLinks C:\Users\user\Desktop\Laboratoria\ProyectosLab\CDMX012-md-links\test-docs\doc2.md ` 
+
 Expected output:
+
 ![Example with an absolute path](./img/absolute-path.png)
+
 
 *** 
 
