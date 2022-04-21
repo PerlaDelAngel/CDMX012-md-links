@@ -45,6 +45,7 @@ To use this library you'll need to run it in the terminal with the command `mdLi
 If no option is provided, the library will process the given path, obtain the links inside the markdown files and return the following information about each link: href, associated text, and file path.
 
 Additionally, you can provide a couple of different options to obtain three different kinds of information about the links found: 
+* `--help` or `-h` : Shows a list of all available options and usage examples. 
 * `--validate` or `-v` : Makes an HTTP request for each link and returns the obtained status for each link.
 * `--stats` or `-s` : Shows the total number of links found as long as the ammount of unique urls. 
 * `--validate --stats` : Show the total number of links found, unique and broken links. 
