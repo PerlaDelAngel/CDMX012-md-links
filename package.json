@@ -1,6 +1,6 @@
 {
   "name": "md-links",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "engines": {
     "node": ">=14.x"
   },
@@ -9,7 +9,7 @@
     "chalk": "^4.1.2",
     "yargs": "^17.4.1"
   },
-  "description": "Library that extracts and validates links",
+  "description": "Library that extracts and validates links found in markdown links",
   "main": "bin/cli.js",
   "directories": {
     "test": "test"

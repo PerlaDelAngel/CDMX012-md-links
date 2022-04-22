@@ -12,7 +12,6 @@ function readDirec(inputPath, arrFiles){
       arrFiles.push(resolvedPath);
     }
   });
-  //console.log(arrFiles);
   return arrFiles;
 }
 
