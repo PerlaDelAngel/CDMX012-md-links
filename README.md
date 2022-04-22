@@ -34,7 +34,8 @@ To set up the logic behind this application I elaborated a [flowchart](#flowchar
 ## 3. Installation
 
 Run the next command in your terminal: 
-`npm install PerlaDelAngel/CDMX012-md-links`
+
+`npm i md-links-pda`
 
 ## 4. Usage
 
