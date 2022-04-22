@@ -33,16 +33,4 @@ function mdLinks(userPath, options){
   })
 }
 
-//Invalid path
-//mdLinks('docs/old-dir');
-
-//Valid path
-//mdLinks('docs');
-//mdLinks('docs/new-dir/doc3.md');
-//mdLinks('docs/new-dir/testdoc.txt');
-//mdLinks('docs/doc1.md');
-
-//Valid path with broken link
-//mdLinks('docs/doc2.md')
-
 module.exports = mdLinks;

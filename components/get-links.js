@@ -1,4 +1,4 @@
-const fs = require('fs'); //file system
+const fs = require('fs'); 
 
 //Reading a file and extracting links
 function getLinks(filePaths){ //recibe un archivo
@@ -42,7 +42,6 @@ function getLinks(filePaths){ //recibe un archivo
       file: paths[i],
     });
   });
-  //console.log(arrayLinks)
   return linksObject;
 }
 
