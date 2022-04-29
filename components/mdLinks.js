@@ -21,14 +21,14 @@ function mdLinks(userPath, options){
     const obtainedLinks = getLinks(mdFiles);
 
     if (options === false) { 
-      return resolve(obtainedLinks);
+      resolve(obtainedLinks);
     } 
     else if (options === true){
       const status = obtainedLinks.map(link => validateLink(link));
-      return resolve(Promise.all(status));
+      resolve(Promise.all(status));
     }
     else {
-      return reject(Error('Something went wrong'));
+      reject(Error('Something went wrong'));
     }
   })
 }
