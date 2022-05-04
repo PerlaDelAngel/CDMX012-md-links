@@ -22,7 +22,7 @@ function validateLink(linkObj){
     } else {
       const finalObj = {
         ...linkObj,
-        'status': 'Deprecated',
+        'status': `Error ${err.message}`,
         'ok': 'fail',
       }
       return finalObj;
