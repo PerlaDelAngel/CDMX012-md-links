@@ -43,7 +43,7 @@ describe('mdLinks', () => {
       {href: 'http://community.laboratoria.la/c/js',
       text: 'foro de la comunidad',
       file: 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md',
-      status: 'Deprecated',
+      status: 'Error getaddrinfo ENOTFOUND community.laboratoria.la',
       ok: 'fail'}
     ];
 

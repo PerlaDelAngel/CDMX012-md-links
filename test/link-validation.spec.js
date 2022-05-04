@@ -63,7 +63,7 @@ describe('Makes a HTTP request for a link', () => {
       href: 'http://community.laboratoria.la/c/js',
       text: 'foro de la comunidad',
       file: 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md',
-      status: 'Deprecated',
+      status: 'Error undefined',
       ok: 'fail',
     };
     axios.get.mockRejectedValue(result);

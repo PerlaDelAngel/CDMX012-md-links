@@ -11,13 +11,22 @@ describe('Identifies markdown files', () => {
     expect(consoleSpy).toHaveBeenCalledWith('This is not a markdown file and cannot be analyzed');
   });
 
-  it('should receive a path to a markdown file and store it in an array', () => {
+  it('should receive a path to a .md file and store it in an array', () => {
     let mdFiles = [];
     const absolutePath = 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md';
 
     pathIsFile(absolutePath, mdFiles);
     
     expect(mdFiles).toEqual(['C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc2.md']);
+  });
+
+  it('should receive a path to a .markdown file and store it in an array', () => {
+    let mdFiles = [];
+    const absolutePath = 'C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc6.markdown';
+
+    pathIsFile(absolutePath, mdFiles);
+    
+    expect(mdFiles).toEqual(['C:\\Users\\user\\Desktop\\Laboratoria\\ProyectosLab\\CDMX012-md-links\\test-docs\\doc6.markdown']);
   });
 });
 
