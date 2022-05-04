@@ -40,7 +40,7 @@ const { argv } = yargs
 
 // Arguments
 const userPath = argv._[0];
-const { validate } = argv;
+const validate = argv.validate;
 const getStats = argv.stats;
 
 // Validation of path arg
@@ -83,3 +83,4 @@ if (userPath === undefined) {
       console.log(errorSty(err));
     });
 }
+
