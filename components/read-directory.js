@@ -6,9 +6,10 @@ function readDirec(inputPath, arrFiles){
 
   filenames.forEach((element)=>{
     const resolvedPath = path.resolve(inputPath, element);
+    const ext = path.extname(resolvedPath);
     if(fs.lstatSync(resolvedPath).isDirectory()){
       readDirec(resolvedPath, arrFiles);
-    } else if(path.extname(resolvedPath) === '.md'){
+    } else if(ext === '.md' || ext === '.markdown' || ext === '.mdown'){ //ext
       arrFiles.push(resolvedPath);
     }
   });
